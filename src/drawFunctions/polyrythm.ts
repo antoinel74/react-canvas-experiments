@@ -2,13 +2,12 @@ import { arcs } from "../assets/arcsColors";
 
 let startTime = new Date().getTime();
 
-export const polyrythm = (pen: CanvasRenderingContext2D, frames: number, paper: HTMLCanvasElement) => {
+export const polyrythm = (pen: CanvasRenderingContext2D, paper: HTMLCanvasElement) => {
   if (typeof window !== "undefined") {
     paper.width = paper.clientWidth;
     paper.height = paper.clientHeight;
   }
 
-  frames = 60;
   let currentTime = new Date().getTime();
   let elapsedTime = (currentTime - startTime) / 1000;
 
