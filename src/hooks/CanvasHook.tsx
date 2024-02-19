@@ -7,12 +7,10 @@ const useCanvas = (draw?: any) => {
     const paper = canvasRef.current;
     const pen = paper?.getContext("2d");
 
-    let frameCount = 0;
     let animationFrameId: number;
 
     const render = () => {
-      frameCount++;
-      draw(pen, frameCount, paper);
+      draw(pen, paper);
       animationFrameId = window.requestAnimationFrame(render);
     };
     render();
