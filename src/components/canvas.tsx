@@ -1,4 +1,3 @@
-import React from "react";
 import useCanvas from "../hooks/CanvasHook";
 
 export const Canvas = (props?: any) => {

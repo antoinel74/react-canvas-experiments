@@ -1,51 +1,21 @@
+import { useState } from "react";
 import { Canvas } from "./components/canvas";
+import { polyrythm } from "./drawFunctions/polyrythm";
+import { Navbar } from "./components/Navbar";
 
 function App() {
-  const draw = (
-    pen: CanvasRenderingContext2D,
-    frames: number,
-    paper: HTMLCanvasElement
-  ) => {
-    if (typeof window !== "undefined") {
-      paper.width = paper.clientWidth;
-      paper.height = paper.clientHeight;
-    }
+  const [selectedCanvas, setSelectedCanvas] = useState(() => polyrythm);
 
-    const start = {
-      x: paper.width * 0.1,
-      y: paper.height * 0.9,
-    };
-
-    const end = {
-      x: paper.width * 0.9,
-      y: paper.height * 0.9,
-    };
-
-    const center = {
-      x: paper.width * 0.5,
-      y: paper.height * 0.9,
-    };
-
-    const length = end.x - start.x;
-
-    if (!paper || !pen) return;
-
-    // BASE //
-    pen.strokeStyle = "white";
-    pen.lineWidth = 6;
-    pen.beginPath();
-    pen.moveTo(start.x, start.y);
-    pen.lineTo(end.x, end.y);
-    pen.stroke();
-
-    // ARC //
-    pen.beginPath();
-    pen.lineWidth = 2;
-    pen.arc(center.x, center.y, length * 0.05, Math.PI, 2 * Math.PI);
-    pen.stroke();
+  const handleDrawFunctionChange = (drawFunction: () => void) => {
+    setSelectedCanvas(drawFunction);
   };
 
-  return <Canvas draw={draw} className="bg-white" />;
+  return (
+    <main>
+      <Navbar drawSwitch={handleDrawFunctionChange} />
+      <Canvas draw={selectedCanvas} />
+    </main>
+  );
 }
 
 export default App;
